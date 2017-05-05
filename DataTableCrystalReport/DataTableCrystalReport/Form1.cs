@@ -24,7 +24,7 @@ namespace DataTableCrystalReport
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ExpenseModel model = GetData();
-            GetReport(model);
+            crystalReportViewer1.ReportSource = GetReport(model);
         }
 
         private ExpenseModel GetData()
@@ -61,7 +61,8 @@ namespace DataTableCrystalReport
                 dataSet.Tables["ExpenseItem"].Rows.Add(row);
             }
             report.SetDataSource(dataSet);
-            
+            report.SetParameterValue("FullName",data.FullName);
+            report.SetParameterValue("Date",data.Date);
             return report;
         }
 
